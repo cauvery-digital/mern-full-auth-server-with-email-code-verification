@@ -19,3 +19,10 @@ git add .
 git commit -m "2nd commit"
 git push origin main
 ```
+
+
+## …or
+
+```bash
+git add . && git commit -m "2nd commit" && git push origin main
+```
