@@ -44,31 +44,17 @@ npm install
 create .env file in server and add your config in .env file
 
 PORT=4000
-
 FRONTEND_URL="http://localhost:4173"
-
 MONGO_URI= ""
-
 JWT_EXPIRE=7d
-
 JWT_SECRET_KEY=your-jwt-secrete
-
 COOKIE_EXPIRE=7
-
 SMTP_SERVICE=gmail
-
 SMTP_MAIL= your@gmail.com
-
-SMTP_PASSWORD= app-password
-
+SMTP_PASSWORD= gmail-app-password
 SMTP_HOST=smtp.gmail.com
-
 SMTP_PORT=465
 
 TWILIO_SID= 
-
 TWILIO_PHONE_NUMBER= 
-
 TWILIO_AUTH_TOKEN= 
-
-
