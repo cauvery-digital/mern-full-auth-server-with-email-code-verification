@@ -35,7 +35,7 @@ git add . && git commit -m "2nd commit" && git push origin main
 git clone https://github.com/cauvery-digital/mern-full-auth-server-with-email-code-verification.git
 ```
 
-### ...then run this command in server folder
+### 1. Run this command
 ```bash
 cd server
 npm install
@@ -58,4 +58,17 @@ SMTP_PORT=465
 TWILIO_SID= 
 TWILIO_PHONE_NUMBER= 
 TWILIO_AUTH_TOKEN= 
+```
+start server 
+```bash
+npm run dev
+```
+
+## 2. Install and Build Client Side
+
+```bash
+cd client
+npm install
+npm run build
+npm run preview
 ```
