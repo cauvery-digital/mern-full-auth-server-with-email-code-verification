@@ -42,7 +42,7 @@ npm install
 ```
 
 create .env file in server and add your config in .env file
-
+```
 PORT=4000
 FRONTEND_URL="http://localhost:4173"
 MONGO_URI= ""
@@ -58,3 +58,4 @@ SMTP_PORT=465
 TWILIO_SID= 
 TWILIO_PHONE_NUMBER= 
 TWILIO_AUTH_TOKEN= 
+```
