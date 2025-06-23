@@ -269,13 +269,103 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = user.generateResetPasswordToken();
   await user.save({ validateBeforeSave: false });
   const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const name = user.name;
 
-  const message = `Your Reset Password Token is:- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then please ignore it.`;
+  // const message = `Your Reset Password Token is:- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then please ignore it.`;
+const message = `
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+  <meta charset="utf-8" />
+  <title>Password Reset</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Arial, sans-serif !important;}
+  </style>
+  <![endif]-->
+  <style>
+  
+    .button__td:hover {background-color: #1E90FF}
+    /* ----- Mobile resets ----- */
+    @media only screen and (max-width: 600px) {
+      .inner-container { width: 100% !important; }
+      .button__td        { padding: 12px 0 !important; }
+      
+      .button__link      { width: 100% !important; }
+    }
+  </style>
+</head>
 
+<body style="margin:0; padding:0; background:#f5f7fa; font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; line-height:1.4; color:#333333;">
+  <!-- Full-width background table -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f7fa;">
+    <tr>
+      <td align="center" style="padding:40px 10px;">
+        <!-- Email container (600 px max) -->
+        <table role="presentation" class="inner-container" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background:#ffffff; border-radius:8px; overflow:hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="padding:24px; background: #4169E1; color:#ffffff; text-align:center;">
+              <h1 style="margin:0; font-size:24px;">Reset Your Password</h1>
+            </td>
+          </tr>
+
+          <!-- Main copy -->
+          <tr>
+            <td style="padding:32px 24px 24px 24px;">
+              <p style="margin:0 0 18px 0; font-size:18px; font-weight:bold;">
+                Hi! ${name},
+              </p>
+              <p style="margin:0 0 22px 0; font-size:16px;">
+                We received a request to reset the password for your account. Click the button below to create a new password. If you didn’t ask to reset your password, you can safely ignore this email.
+              </p>
+
+              <!-- CTA button -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+                <tr>
+                  <td class="button__td" bgcolor="#4169E1" style="border-radius:4px;">
+                    <a href="${resetPasswordUrl}" class="button__link"
+                       style="font-size:16px; line-height:20px; color:#ffffff; text-decoration:none; padding:14px 32px; display:inline-block;">
+                      Reset Password
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:28px 0 0 0; font-size:14px; color:#555555;">
+                This link will expire in 30&nbsp;minutes for your security.
+              </p>
+
+              <p style="margin:24px 0 0 0; font-size:14px; color:#555555;">
+                If the button doesn’t work, paste this URL into your browser:<br />
+                <a href="{{reset_url}}" style="word-break:break-all; color:#0066cc;">${resetPasswordUrl}</a>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 24px; background:#f0f3f8; text-align:center; font-size:12px; color:#888888;">
+              © 2025 Your Company. All rights reserved.<br />
+              123, Example Road, Mumbai 400 001
+            </td>
+          </tr>
+
+        </table><!-- /inner-container -->
+      </td>
+    </tr>
+  </table><!-- /Full-width background -->
+</body>
+</html>
+
+
+`;
   try {
     sendEmail({
       email: user.email,
-      subject: "MERN AUTHENTICATION APP RESET PASSWORD",
+      subject: "YOUR LOGIN RESET PASSWORD",
       message,
     });
     res.status(200).json({
